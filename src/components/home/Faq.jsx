@@ -76,7 +76,7 @@ const Faq = () => {
                 </div>
             </div>
 
-            <div className="w-full   h-[40vw] ">
+            <div className="w-full  pointer-events-none  h-[40vw] ">
              
             </div>
         </>
