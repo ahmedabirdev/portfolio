@@ -33,7 +33,7 @@ export default function SiteLayout({ children }) {
       <LenisScroll>
         <div className="page-root">
           <Header />
-          <div className="overlay opacity-100 bg-black/40 fixed top-0 left-0 w-full h-screen pointer-events-none"></div>
+          <div className="overlay opacity-0 bg-black/40 fixed top-0 left-0 w-full h-screen pointer-events-none"></div>
           <main>{children}</main>
           <Footer />
         </div>

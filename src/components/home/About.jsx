@@ -29,10 +29,25 @@ const About = () => {
 
     return (
         <>
-            <div className="background about_paren w-full   padding flex flex-col justify-center">
-                <div className=" mt-5 text-7xl font-semibold py-[12vw] leading-[5.2rem]">
-                    <p className='split_txt'><span className='text-xl heading  -translate-y-3'>About Me</span> <span className='opacity-0'>.....................................</span>
-                        I’m a <span className='heading font-thin'> passionate  </span>  innovator from Bangladesh, using computer science and  <span className='heading font-thin'> creative </span>  technology to <span className='heading font-thin'> solve </span>   real-world problems and build <span className='heading font-thin'> impactful,</span> future-driven solutions.</p>
+            <div className="background about_paren w-full text-center padding flex flex-col justify-center">
+                <h2 className='text-6xl  font-semibold '>About Me</h2>
+                <div className=" text-4xl space-y-10 px-52 font-semibold  pt-10 ">
+                    <p className='split_txt'>I’m a <span className='heading font-thin'> passionate  </span>  innovator from Bangladesh, using computer science and  <span className='heading font-thin'> creative </span>  technology to <span className='heading font-thin'> solve </span>   real-world problems and build <span className='heading font-thin'> impactful,</span> future-driven solutions.</p>
+                    <p className='split_txt'>I’m a <span className='heading font-thin'> passionate  </span>  innovator from Bangladesh, using computer science and  <span className='heading font-thin'> creative </span>  technology to <span className='heading font-thin'> solve </span>   real-world problems and build <span className='heading font-thin'> impactful,</span> future-driven solutions.</p>
+                </div>
+                <div className="w-full mt-32 grid grid-cols-3">
+                    <div className="w-full font-semibold center flex-col">
+                        <h2 className='text-6xl'>20+</h2>
+                        <p className='text-xl'>Stacks i use</p>
+                    </div>
+                    <div className="w-full font-semibold center flex-col">
+                        <h2 className='text-6xl'>15 <sup>+</sup></h2>
+                        <p className='text-xl'>Projects</p>
+                    </div>
+                    <div className="w-full font-semibold center flex-col">
+                        <h2 className='text-6xl'>2</h2>
+                        <p className='text-xl'>Research paper published</p>
+                    </div>
                 </div>
             </div>
         </>

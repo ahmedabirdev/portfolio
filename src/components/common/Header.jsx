@@ -66,7 +66,7 @@ const Header = () => {
               )
             }
           </div>
-          <button onClick={() => setOpenMenu(!openMenu)} className='size-12 menu_btn absolute right-2 top-2 rounded-full shrink-0 center '>
+          <button onClick={() => setOpenMenu(!openMenu)} className='size-12 menu_btn bg-[#E2E1DF] absolute right-2 top-2 rounded-full shrink-0 center '>
             <Hamburger size={18} toggled={openMenu} toggle={setOpenMenu} />
           </button>
         </div>

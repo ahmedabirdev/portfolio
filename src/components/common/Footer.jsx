@@ -4,7 +4,7 @@ import { ContactData, MenuData, SocialData } from '../helpers/MenuData'
 const Footer = () => {
   return (
     <>
-      <div className="w-full pointer-events-auto  z-[1] left-0 px-[6vw]  ">
+      <div className="w-full pointer-events-auto mt-20  z-[1] left-0 px-[6vw]  ">
         <div className="w-full  gap-4 grid  grid-cols-[49%_17%_17%_17%]">
 
           <div className="w-full font-semibold space-y-5 text-xl">
