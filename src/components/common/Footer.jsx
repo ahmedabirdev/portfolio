@@ -1,5 +1,7 @@
 import React from 'react'
 import { ContactData, MenuData, SocialData } from '../helpers/MenuData'
+import Button from './Button'
+import { Link } from 'next-view-transitions'
 
 const Footer = () => {
   return (
@@ -8,11 +10,8 @@ const Footer = () => {
         <div className="w-full  gap-4 grid  grid-cols-[49%_17%_17%_17%]">
 
           <div className="w-full font-semibold space-y-5 text-xl">
-            <h2 className=''> Let’s Connect</h2>
-            <button className='px-5 group  gap-3 hover:gap-6 transition-all duration-300 py-2  flex items-center black rounded-md  font-thin text-lg'>
-              <p className='text-white'>Send Mail</p>
-              <div className="size-5 center rounded-sm font-semibold  bg-white">→</div>
-            </button>
+            <h2 className='text-3xl'> Let’s Connect</h2>
+           <Button text={"Send Mail"} />
           </div>
 
           <div className=" font-semibold space-y-3 text-xl">
@@ -20,10 +19,10 @@ const Footer = () => {
             <div className=" font-thin text-base space-y-1">
               {
                 MenuData.map((link, index) =>
-                  <a href={link.href} key={index} className=' flex items-center  group  '>
+                  <Link href={link.href} key={index} className=' flex items-center  group  '>
                     <div className="size-0 bg-black group-hover:size-1 rounded-full group-hover:mr-1 transition-all duration-300"></div>
                     {link.title}
-                  </a>
+                  </Link>
                 )
               }
             </div>

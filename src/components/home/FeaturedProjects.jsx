@@ -1,5 +1,6 @@
 "use client";
 import { RiArrowLeftLine, RiArrowLeftSLine, RiArrowRightLine, RiArrowRightSLine } from "@remixicon/react";
+import { Link } from "next-view-transitions";
 import { useEffect, useState } from "react";
 
 export default function FramerCarousel() {
@@ -91,7 +92,9 @@ export default function FramerCarousel() {
     >
       <div className="absolute top-1/2 left-0 w-full h-[35vw] -translate-y-1/2 perspective-[900px] [transform-style:preserve-3d]">
         {carouselData.map((item, i) => (
-          <div
+          <Link
+            href={"/projects"}
+            prefetch
             key={i}
             className="absolute left-1/2 w-[50vw] h-full -translate-x-1/2 rounded-2xl overflow-hidden transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
             style={getStyle(i)}
@@ -113,7 +116,7 @@ export default function FramerCarousel() {
                 className="w-full h-full object-cover pointer-events-none"
               />
             )}
-          </div>
+          </Link>
         ))}
       </div>
 

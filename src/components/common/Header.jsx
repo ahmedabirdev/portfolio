@@ -3,6 +3,7 @@ import gsap from 'gsap'
 import React, { useEffect, useState } from 'react'
 import { Squash as Hamburger } from 'hamburger-react'
 import { MenuData } from '../helpers/MenuData'
+import { Link } from 'next-view-transitions'
 
 const Header = () => {
 
@@ -59,10 +60,10 @@ const Header = () => {
           <div className="flex flex-col mt-5 gap-y-2">
             {
               MenuData.map((link, index) =>
-                <a href={link.href} key={index} className='text-2xl flex items-center gap-0 group anim_link opacity-0 translate-y-2 uppercase font-semibold'>
+                <Link onClick={() => setOpenMenu(false)} href={link.href} key={index} className='text-2xl flex items-center gap-0 group anim_link opacity-0 translate-y-2 uppercase font-semibold'>
                   <div className="size-0 bg-black group-hover:size-2 rounded-full group-hover:mr-2 transition-all duration-300"></div>
                   {link.title}
-                </a>
+                </Link>
               )
             }
           </div>
