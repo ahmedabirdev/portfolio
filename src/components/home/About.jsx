@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 import SplitText from 'gsap/dist/SplitText'
 import React from 'react'
+import Button from '../common/Button'
 gsap.registerPlugin(ScrollTrigger)
 
 const About = () => {
@@ -29,25 +30,32 @@ const About = () => {
 
     return (
         <>
-            <div className="background about_paren w-full text-center padding flex flex-col justify-center">
+            <div className=" about_paren pt-32! w-full text-center padding flex flex-col justify-center">
                 <h2 className='text-6xl  font-semibold '>About Me</h2>
                 <div className=" text-4xl space-y-10 px-52 font-semibold  pt-10 ">
                     <p className='split_txt'>I’m a <span className='heading font-thin'> passionate  </span>  innovator from Bangladesh, using computer science and  <span className='heading font-thin'> creative </span>  technology to <span className='heading font-thin'> solve </span>   real-world problems and build <span className='heading font-thin'> impactful,</span> future-driven solutions.</p>
                     <p className='split_txt'>I’m a <span className='heading font-thin'> passionate  </span>  innovator from Bangladesh, using computer science and  <span className='heading font-thin'> creative </span>  technology to <span className='heading font-thin'> solve </span>   real-world problems and build <span className='heading font-thin'> impactful,</span> future-driven solutions.</p>
+                    <div className="w-full center">
+                        <Button text={"Download Resume"} />
+                    </div>
                 </div>
-                <div className="w-full mt-32 grid grid-cols-3">
+                <div className="w-full px-20 mt-32 grid grid-cols-3">
+
                     <div className="w-full font-semibold center flex-col">
-                        <h2 className='text-6xl'>20+</h2>
-                        <p className='text-xl'>Stacks i use</p>
+                        <h2 className='text-6xl'>20 <sup>+</sup></h2>
+                        <p className='text-xl'>Successfully Delivered Projects</p>
                     </div>
+
                     <div className="w-full font-semibold center flex-col">
-                        <h2 className='text-6xl'>15 <sup>+</sup></h2>
-                        <p className='text-xl'>Projects</p>
+                        <h2 className='text-6xl'>10 <sup>+</sup></h2>
+                        <p className='text-xl'>Advanced Technical Skills</p>
                     </div>
+
                     <div className="w-full font-semibold center flex-col">
-                        <h2 className='text-6xl'>2</h2>
-                        <p className='text-xl'>Research paper published</p>
+                        <h2 className='text-6xl'>5+</h2>
+                        <p className='text-xl'>Web Designs</p>
                     </div>
+
                 </div>
             </div>
         </>

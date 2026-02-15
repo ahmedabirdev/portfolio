@@ -1,11 +1,14 @@
 "use client";
 import { ProjectsData } from "@/data/ProjectsData";
-import { RiArrowRightLine } from "@remixicon/react";
+import { RiArrowRightLine, RiArrowRightUpLine, RiCloseLine, RiGithubFill, RiYoutubeFill } from "@remixicon/react";
 import { Link } from "next-view-transitions";
 import { useParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Page = () => {
+
+    const [openYtVideo, setopenYtVideo] = useState(false)
+    const [openYtVideo2, setopenYtVideo2] = useState(false)
 
     const [expandDesc, setExpandDesc] = useState(false)
 
@@ -13,17 +16,99 @@ const Page = () => {
 
     const project = ProjectsData.find((project) => project.slug === slug);
 
+    const currentIndex = ProjectsData.findIndex(
+        (project) => project.slug === slug
+    );
+
+    if (currentIndex === -1) return null;
+
+    const totalProjects = ProjectsData.length;
+
+    const prevIndex =
+        currentIndex === 0 ? totalProjects - 1 : currentIndex - 1;
+
+    const nextIndex =
+        currentIndex === totalProjects - 1 ? 0 : currentIndex + 1;
+
+    const prevSlug = ProjectsData[prevIndex].slug;
+    const nextSlug = ProjectsData[nextIndex].slug;
+
+
     if (!project) return null;
+
+    useEffect(() => {
+        if (openYtVideo || openYtVideo2) {
+            if (window.lenis) window.lenis.stop();
+        } else {
+            if (window.lenis) window.lenis.start();
+        }
+    }, [openYtVideo, openYtVideo2])
+
 
     return (
         <>
             <>
+
+                <div className={`w-full fixed top-0 left-0 h-screen center z-[9999]  bg-[#00000083] transition-all duration-300 ${openYtVideo ? "opacity-100 pointer-events-auto backdrop-blur-md" : "opacity-0 pointer-events-none backdrop-blur-[0px]"}  `}>
+                    <div onClick={() => setopenYtVideo(false)} className="absolute cursor-pointer hover:scale-110 top-5 right-5 center rounded-full size-10 font-bold bg-white transition-all duration-300 ">
+                        <RiCloseLine />
+                    </div>
+                    <div className="h-[90%] aspect-video">
+                        <iframe width="100%" height="100%" src={project?.yt_video} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                    </div>
+                </div>
+
+                <div className={`w-full fixed top-0 left-0 h-screen center z-[9999]  bg-[#00000083] transition-all duration-300 ${openYtVideo2 ? "opacity-100 pointer-events-auto backdrop-blur-md" : "opacity-0 pointer-events-none backdrop-blur-[0px]"}  `}>
+                    <div onClick={() => setopenYtVideo2(false)} className="absolute cursor-pointer hover:scale-110 top-5 right-5 center rounded-full size-10 font-bold bg-white transition-all duration-300 ">
+                        <RiCloseLine />
+                    </div>
+                    <div className="h-[90%] aspect-video">
+                        <iframe width="100%" height="100%" src={project?.yt_video2} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                    </div>
+                </div>
+
                 <div className="w-full h-[60vh]  flex flex-col justify-end padding pb-0! ">
-                    <h2 className="text-6xl font-semibold">{project.title}</h2>
-                    <p className="text-2xl w-1/2 leading-none my-5 ">{project.subtitle}</p>
+                    <h2 className="text-6xl font-semibold">{project.name}</h2>
+                    <div className="flex gap-x-2">
+                        {project.github_link && (
+                            <button
+                                type="button"
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    e.stopPropagation()
+                                    window.open(project.github_link, "_blank")
+                                }}
+                                className="group/btn"
+                            >
+                                <RiGithubFill
+                                    size={32}
+                                    color="black"
+                                    className="transition-transform duration-300 group-hover/btn:scale-[1.2]"
+                                />
+                            </button>
+                        )}
+                        {project.live_link && (
+                            <button
+                                type="button"
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    e.stopPropagation()
+                                    window.open(project.live_link, "_blank")
+                                }}
+                                className="group/btn"
+                            >
+                                <RiArrowRightUpLine
+                                    size={32}
+                                    color="black"
+                                    className="transition-transform duration-300 group-hover/btn:scale-[1.2]"
+                                />
+                            </button>
+                        )}
+                    </div>
+                    {/* <p className="text-2xl w-1/2 leading-none my-5 ">{project.subtitle}</p> */}
                     <div className="w-full   flex gap-2 mt-10">
                         {
-                            project.categories.map((category) => (
+                            project.technologiesUsed.map((category) => (
                                 <div key={category} className="bg-[#E2E1DF] uppercase font-semibold text-sm px-5 py-3 rounded-full ">
                                     {category}
                                 </div>
@@ -34,7 +119,7 @@ const Page = () => {
 
                 <div className="padding flex gap-x-10  text-xl leading-tight">
                     <div className="w-1/2">
-                        <p>{project.desc}</p>
+                        <p>{project.projectOverview}</p>
                         <button onClick={() => setExpandDesc(!expandDesc)} className="mt-2 opacity-50 hover:opacity-100 transition-all duration-300">Read {expandDesc ? "Less" : "More"}</button>
                     </div>
                     <div
@@ -44,14 +129,25 @@ const Page = () => {
   `}
                     >
                         <div className="space-y-5">
-                            <h2 className="font-semibold">A Greentech Insight</h2>
-                            <p className="leading-tight text-lg opacity-80">Sylvera were seeking a flexible brand and design system to help the company expand into their next phase of growth and accurately represent data driven insights for investors. The Sylvera and New Genre partnership began through our experience in greentech and comprehensive, multi-platform design systems.</p>
+                            <h2 className="font-semibold">Project Overview</h2>
+                            {project?.shortPreview?.map((paragraph, index) => (
+                                <p key={index} className="leading-tight text-lg opacity-80">{paragraph}</p>
+                            ))}
                         </div>
-                        <div className="space-y-5">
-                            <h2 className="font-semibold">Then it Clicked</h2>
-                            <p className="leading-tight text-lg opacity-80">As a foundational element, we developed a custom masking shape system derived from flattened world map projections. The grid system is inspired by longitude and latitude lines that represent pin point accuracy in carbon data whilst bringing structure to the design system.</p>
-                            <p className="leading-tight text-lg opacity-80">In creating the Sylvera logo, we drew inspiration from a globe and combined that with an off centre click effect to signify shifting toward positive climate action. The click effect is a recurring motif across the design system and can also be seen in the intersection of the grid as the axis points meet and click together.</p>
-                            <p className="leading-tight text-lg opacity-80">We chose the Aeroport typeface to embody clear legibility and to further enhance the notion of open access to critical climate data. The consistent application allows investors to easily navigate complex data and environmental insights.</p>
+                        <div className="w-full grid grid-cols-2">
+
+                            <div className="space-y-5">
+                                <h2 className="font-semibold">Skills</h2>
+                                {project?.skills?.map((skill, index) => (
+                                    <p key={index} className="leading-tight text-lg opacity-80">{skill}</p>
+                                ))}
+                            </div>
+                            <div className="space-y-5">
+                                <h2 className="font-semibold">Functionalities</h2>
+                                {project?.functionalities?.map((functionality, index) => (
+                                    <p key={index} className="leading-tight text-lg opacity-80">{functionality}</p>
+                                ))}
+                            </div>
                         </div>
                         <button
                             onClick={() => {
@@ -66,40 +162,50 @@ const Page = () => {
                     </div>
                 </div>
                 <div className="padding">
-                    <div className="w-full grid gap-5 grid-cols-2 pt-16 border-t border-black/20">
-                        <div className="w-full rounded-xl overflow-hidden col-span-2">
-                            <video loop autoPlay muted playsInline className="cover" src="https://framerusercontent.com/assets/pi3nDUOR6bddbonV6pQOZJGXMM.mp4"></video>
+                    <div onClick={() => setopenYtVideo(true)} className="w-full drop-shadow-xl relative center group rounded-xl overflow-hidden col-span-2 aspect-video">
+                        <img className=" w-[6vw] cursor-pointer absolute z-10 invert-100 opacity-0 group-hover:opacity-100 transition-all duration-300" src="https://cdn-icons-png.flaticon.com/512/974/974542.png" alt="" />
+                        <img className="cover brightness-100 group-hover:brightness-[.65] group-hover:blur-xs blur-[0px] transition-all duration-300    " src={project?.cover_img} alt="" />
+                    </div>
+                    {project.yt_video2 && (
+                        <div onClick={() => setopenYtVideo2(true)} className="w-full mt-5 drop-shadow-xl relative center group rounded-xl overflow-hidden col-span-2 aspect-video">
+                            <img className=" w-[6vw] cursor-pointer absolute z-10 invert-100 opacity-0 group-hover:opacity-100 transition-all duration-300" src="https://cdn-icons-png.flaticon.com/512/974/974542.png" alt="" />
+                            <img className="cover brightness-100 group-hover:brightness-[.65] group-hover:blur-xs blur-[0px] transition-all duration-300    " src={project?.cover_img_2} alt="" />
                         </div>
-                        <div className="w-full rounded-xl overflow-hidden col-span-1">
-                            <img className="cover" src="https://framerusercontent.com/images/4eIxatehd7PwkcreyU4fOz3APk.webp?width=1920&height=2400" alt="" />
-                        </div>
-                        <div className="w-full rounded-xl overflow-hidden col-span-1">
-                            <img className="cover" src="https://framerusercontent.com/images/wlmPZzV0c27t3Ze9sL4nPe3uWc.webp?scale-down-to=2048&width=3840&height=2160" alt="" />
-                        </div>
-                        <div className="w-full rounded-xl overflow-hidden col-span-2">
-                            <video loop autoPlay muted playsInline className="cover" src="https://framerusercontent.com/assets/VyLa1FwLisPRfsZs9kaVqt78I.mp4"></video>
-                        </div>
-                        <div className="w-full rounded-xl overflow-hidden col-span-1">
-                            <video className="cover" loop autoPlay muted playsInline src="https://framerusercontent.com/assets/39EJlm8b5IrO241GVxNapHsMU.mp4" alt="" />
-                        </div>
-                        <div className="w-full rounded-xl overflow-hidden col-span-1">
-                            <video className="cover" loop autoPlay muted playsInline src="https://framerusercontent.com/assets/4xfB7fdiRsWsJB6jxgi6ZWnjGA.mp4" alt="" />
-                        </div>
+                    )}
+                    <div className="w-full grid gap-5 grid-cols-2 pt-5 border-t border-black/20">
+                        {project.images.map((image, index) => (
+                            <div key={index} className="w-full drop-shadow-xl rounded-xl overflow-hidden">
+                                <img className="cover" src={image} alt="" />
+                            </div>
+                        ))}
                     </div>
                 </div>
             </>
 
             <div className="w-full padding py-0! h-20 border-t gap-x-10 border-b border-black/20 text-2xl leading-none font-semibold flex items-center justify-center">
-                <button className="flex  hover:-translate-x-3 transition-all duration-300 items-center gap-2">
-                    <h2>←</h2>
-                    <h2>Prev</h2>
-                </button>
+
+                <Link href={`/projects/${prevSlug}`}>
+                    <button
+                        className="flex hover:-translate-x-3 transition-all duration-300 items-center gap-2"
+                    >
+                        <h2>←</h2>
+                        <h2>Prev</h2>
+                    </button>
+                </Link>
+
                 <div className="w-px h-full bg-black/20"></div>
-                <button className="flex hover:translate-x-3 transition-all duration-300  items-center gap-2">
-                    <h2>Next</h2>
-                    <h2>→</h2>
-                </button>
+
+                <Link href={`/projects/${nextSlug}`}>
+                    <button
+                        className="flex hover:translate-x-3 transition-all duration-300 items-center gap-2"
+                    >
+                        <h2>Next</h2>
+                        <h2>→</h2>
+                    </button>
+                </Link>
+
             </div>
+
 
         </>
     );
