@@ -14,10 +14,9 @@ export default function ContactPage() {
                 <div className="w-full flex items-stretch">
                     <div className="w-1/2 flex flex-col justify-between">
                         <div className="text-3xl font-thin  space-y-4 ">
-                            <p>email@example.com</p>
-                            <p>(555) 555-5555</p>
-                            <p>123 Demo Street <br />
-                                New York, NY 12345
+                            <p>ahmedabir2852@gmail.com</p>
+                            <p>+880 1822627775</p>
+                            <p>Kushtia, Bangladesh
                             </p>
                         </div>
                         <div className=" flex gap-x-5 items-center">

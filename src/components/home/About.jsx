@@ -34,10 +34,6 @@ const About = () => {
                 <h2 className='text-6xl  font-semibold '>About Me</h2>
                 <div className=" text-4xl space-y-10 px-52 font-semibold  pt-10 ">
                     <p className='split_txt'>I’m a <span className='heading font-thin'> passionate  </span>  innovator from Bangladesh, using computer science and  <span className='heading font-thin'> creative </span>  technology to <span className='heading font-thin'> solve </span>   real-world problems and build <span className='heading font-thin'> impactful,</span> future-driven solutions.</p>
-                    <p className='split_txt'>I’m a <span className='heading font-thin'> passionate  </span>  innovator from Bangladesh, using computer science and  <span className='heading font-thin'> creative </span>  technology to <span className='heading font-thin'> solve </span>   real-world problems and build <span className='heading font-thin'> impactful,</span> future-driven solutions.</p>
-                    <div className="w-full center">
-                        <Button text={"Download Resume"} />
-                    </div>
                 </div>
                 <div className="w-full px-20 mt-32 grid grid-cols-3">
 

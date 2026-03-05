@@ -54,10 +54,10 @@ const Header = () => {
 
   return (
     <>
-      <div className=" fixed top-0 z-[99] pointer-events-none  padding w-full  flex justify-between">
-        <Link href="/" className='cursor-pointer pointer-events-auto' > 
+      <div className=" fixed top-0 z-[99] pointer-events-none  padding w-full  flex justify-end">
+        {/* <Link href="/" className='cursor-pointer pointer-events-auto' > 
         <h2 className='text-3xl font-semibold'>Ahmed Abir's <br /> Portfolio</h2>
-        </Link>
+        </Link> */}
         <div className=" menu_paren pointer-events-auto w-16 overflow-hidden  p-6 relative  rounded-4xl origin-top-right   aspect-square ">
           <h2 className='text-xl anim_link opacity-0 translate-y-2 font-semibold'>Menu</h2>
           <div className="flex flex-col mt-5 gap-y-2">

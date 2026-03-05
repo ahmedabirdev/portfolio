@@ -6,10 +6,11 @@ import { Link } from 'next-view-transitions'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
+
 const page = () => {
   const [isFading, setIsFading] = useState(false);
-  const categories = ["All", ...new Set(ProjectsData.map(item => item.category))]
   const [activeCategory, setActiveCategory] = useState("All")
+  const categories = ["All", "Robotics", "Ui/Ux", "Coding", "Backend Development", "Frontend Development", "MERN Stack"]
 
   const filteredProjects =
     activeCategory === "All"
@@ -20,10 +21,11 @@ const page = () => {
   return (
     <>
       {/* HEADER */}
-      <div className="w-full padding h-[70vh] flex flex-col justify-end">
+      <div className="w-full padding h-[75vh] flex flex-col gap-y-5 justify-end">
         <h2 className="text-6xl font-semibold">Explore Mine Projects</h2>
-        <p className="text-2xl w-1/2 leading-none my-5">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        <p className="text-2xl w-[60%] leading-snug my-5">
+          From concept to execution, each project blends design, motion, and engineering
+          to create fast, immersive, and visually striking digital experiences.
         </p>
 
         {/* CATEGORIES */}
